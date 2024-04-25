@@ -10,7 +10,7 @@
         <div class="flex max-w-2xl mx-auto sm:px-6 lg:px-8 py-10 bg-white overflow-hidden shadow-sm sm:rounded-lg my-10" >
             <form
               enctype="multipart/form-data"
-              class="w-full mb-6" >
+              class="w-full mb-6 px-4" >
                 <shared-form :form="form" @submitted="(form) => submit(form)"/>
             </form>
         </div>

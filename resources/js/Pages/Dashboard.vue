@@ -190,7 +190,12 @@
 
             destroyEmployee(employee) {
                 if (confirm("Are you sure you want to delete this user?")) {
-                    this.$inertia.delete(route("employees.delete", employee));
+                    this.$inertia.delete(route("employees.delete", employee),{
+                        onSuccess:()=>{
+                            const employeeIndex = this.paginateEmployees.findIndex(i => i.id === employee.id);
+                            this.paginateEmployees.splice(employeeIndex, 1);
+                        }
+                    })
                 }
             },
 
