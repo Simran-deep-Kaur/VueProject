@@ -12,11 +12,10 @@ class SearchEmployeesController extends Controller
     {
         if ($request->user()->hasRole('super-admin')){
             $query = Employee::query();
-        }
-        else{
+        } else{
             $query = $request->user()->employees();
-         
         }
+
         $employees = Employee::searchAndFilter($query, $request->filter, $request->search)->paginate(10);
 
         return response()->json([

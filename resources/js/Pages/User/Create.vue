@@ -18,29 +18,31 @@
 </template>
 
 <script>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import SharedForm from './Form.vue';
-import { useForm } from "@inertiajs/vue3";
+    import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+    import { Head } from "@inertiajs/vue3";
+    import SharedForm from './Form.vue';
+    import { useForm } from "@inertiajs/vue3";
 
-export default {
-    components: {
-        AuthenticatedLayout,
-        Head,
-        SharedForm,
-    },
-    data() {
-        return {
-            form: useForm({
-                name: "",
-                email: "",
-            }),
-        };
-    },
-    methods: {
-        submit (form) {
-            form.post(route("users.store"));
+    export default {
+        components: {
+            AuthenticatedLayout,
+            Head,
+            SharedForm,
         },
-    }
-};
+
+        data() {
+            return {
+                form: useForm({
+                    name: "",
+                    email: "",
+                }),
+            };
+        },
+        
+        methods: {
+            submit (form) {
+                form.post(route("users.store"));
+            },
+        }
+    };
 </script>

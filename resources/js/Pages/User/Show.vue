@@ -23,15 +23,17 @@
 </template>
 
 <script>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+    import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+    import { Head } from "@inertiajs/vue3";
 
-export default {
-    components: {
-        AuthenticatedLayout,
-        Head,
-    },
-    
-    props: ["user"],
-};
+    export default {
+        components: {
+            AuthenticatedLayout,
+            Head,
+        },
+        
+        props: [
+            "user"
+        ],
+    };
 </script>

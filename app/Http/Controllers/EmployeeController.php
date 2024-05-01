@@ -14,7 +14,6 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        // dd($request->filter);
         if ($request->user()->hasRole('super-admin')){
             $query = Employee::query();
         }

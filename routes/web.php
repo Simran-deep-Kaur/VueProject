@@ -36,6 +36,8 @@ Route::get('users/edit/{user}', [UserController::class, 'edit'])->name('users.ed
 Route::delete('/users/delete/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 Route::put('/users/update/{user}', [UserController::class, 'update'])->name('user.update');
 
+Route::get('/users/destroyUserValidation/{user}', [UserController::class, 'destroyUserValidation'])->name('user.destroyvalidation');
+
 Route::get('/paginated-employees', [PaginatedEmployeesController::class, 'paginatedEmployees'])->name('paginated-employees');
 Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
 Route::get('/search', [SearchEmployeesController::class, 'search'])->name('employees.search');
@@ -50,7 +52,7 @@ Route::middleware(EmployeeAccessControl::class)->group(function() {
 Route::get('/user/create', [UserController::class, 'create'])->name('users.create');
 Route::post('/user/store', [UserController::class, 'store'])->name('users.store');
 
-Route::get('/validateEmail', [ValidateEmailController::class, 'validateEmail'])->name('employees.validateEmail');
+Route::get('/validateEmail', [ValidateEmailController::class, 'validateEmail'])->name('validateEmail');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

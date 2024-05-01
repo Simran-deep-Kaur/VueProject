@@ -9,12 +9,10 @@
             id="name"
             name="name"
             class="form-input rounded-md border-gray-300 w-full" />
-
         <span class="text-red-600" v-if="form.errors.name">
             {{ form.errors.name }}
         </span>
     </div>
-
     <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2" >
             Email
@@ -30,7 +28,6 @@
             {{ form.errors.email }}
         </span>
     </div>
-
     <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2">Gender</label>
         <div>
@@ -69,7 +66,6 @@
             {{ form.errors.gender }}
         </span>
     </div>
-
     <div class="mb-4">
         <label
             for="age"
@@ -97,7 +93,6 @@
             class="form-textarea rounded-md border-gray-300 w-full">
         </textarea>
     </div>
-
     <div class="mb-4">
         <label
             for="profile_image"
@@ -112,7 +107,6 @@
             accept="image/*"
             class="form-input rounded-md border-gray-300 w-full" />
     </div>
-
     <div class="mb-4 mt-10">
         <button-component
             @click="$emit('submitted', form)"
@@ -128,9 +122,13 @@
     export default {
         components: { ButtonComponent },
 
-        props: [ "form" ],
+        props: [
+            "form"
+        ],
 
-        emits: ['submitted'],
+        emits: [
+            'submitted'
+        ],
 
         methods: {
             updateProfileImage(event) {
@@ -138,7 +136,7 @@
             },
 
             validateEmail() {
-                axios.get(route("employees.validateEmail", { email: this.form.email }))
+                axios.get(route("validateEmail", { email: this.form.email }))
                     .then((response) => {
                         if (Boolean(response.data)) this.form.errors.email = response.data.message;
 

@@ -11,7 +11,10 @@ class ValidateEmailController extends Controller
     public function validateEmail(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => [Rule::unique('employees')->ignore($request->Id, 'id')],
+            'email' => [
+                Rule::unique('employees')->ignore($request->Id, 'id'),
+                Rule::unique('users')->ignore($request->Id, 'id')
+            ],
         ]);
 
         if ($validator->fails()) {

@@ -8,7 +8,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps(['type']);
-console.log(props.type);
+
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -31,7 +31,7 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard', { type: 'employees' })" :active="type === 'employees' || type === null"> 
+                                <NavLink :href="route('dashboard', { type: 'employees' })" :active="type === 'employees' || !Boolean(type) "> 
                                     Employees
                                 </NavLink>
                                 <NavLink :href="route('dashboard', { type: 'users' })" :active="type === 'users'">

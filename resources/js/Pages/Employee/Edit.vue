@@ -18,37 +18,40 @@
 </template>
 
 <script>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import SharedForm from './SharedForm.vue';
-import { useForm } from "@inertiajs/vue3";
+    import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+    import { Head } from "@inertiajs/vue3";
+    import SharedForm from './Form.vue';
+    import { useForm } from "@inertiajs/vue3";
 
-export default {
-    components: {
-        AuthenticatedLayout,
-        Head,
-        SharedForm,
-    },
-    
-    props: ["employee"],
-
-    data() {
-        return {
-            form: useForm({
-                _method: "PUT",
-                name: this.employee.name,
-                email: this.employee.email,
-                gender: this.employee.gender,
-                age: this.employee.age,
-                description: this.employee.description,
-                profile_image: "",
-            }),
-        };
-    },
-    methods: {
-        submit(form) {
-            form.post(route("employees.update", this.employee));
+    export default {
+        components: {
+            AuthenticatedLayout,
+            Head,
+            SharedForm,
         },
-    },
-};
+        
+        props: [
+            "employee"
+        ],
+
+        data() {
+            return {
+                form: useForm({
+                    _method: "PUT",
+                    name: this.employee.name,
+                    email: this.employee.email,
+                    gender: this.employee.gender,
+                    age: this.employee.age,
+                    description: this.employee.description,
+                    profile_image: "",
+                }),
+            };
+        },
+        
+        methods: {
+            submit(form) {
+                form.post(route("employees.update", this.employee));
+            },
+        },
+    };
 </script>

@@ -11,41 +11,43 @@
             <form
                 class="w-full mb-6"
                 enctype="multipart/form-data" >
-               <shared-form :form="form" @submitted="(form) => submit(form)" />
+                    <shared-form :form="form" @submitted="(form) => submit(form)" />
             </form>
         </div>
     </AuthenticatedLayout>
 </template>
 
 <script>
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
-import SharedForm from './Form.vue';
-import { useForm } from "@inertiajs/vue3";
+    import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+    import { Head } from "@inertiajs/vue3";
+    import SharedForm from './Form.vue';
+    import { useForm } from "@inertiajs/vue3";
 
-export default {
-    components: {
-        AuthenticatedLayout,
-        Head,
-        SharedForm,
-    },
-
-    props: ["user"],
-
-    data() {
-        return {
-            form: useForm({
-                _method: "PUT",
-                name: this.user.name,
-                email: this.user.email,
-            }),
-        };
-    },
-    
-    methods: {
-        submit(form) {
-            form.post(route("user.update", this.user));
+    export default {
+        components: {
+            AuthenticatedLayout,
+            Head,
+            SharedForm,
         },
-    },
-};
+
+        props: [
+            "user"
+        ],
+
+        data() {
+            return {
+                form: useForm({
+                    _method: "PUT",
+                    name: this.user.name,
+                    email: this.user.email,
+                }),
+            };
+        },
+        
+        methods: {
+            submit(form) {
+                form.post(route("user.update", this.user));
+            },
+        },
+    };
 </script>

@@ -14,7 +14,6 @@
             {{ form.errors.name }}
         </span>
     </div>
-
     <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2" >
             Email
@@ -24,12 +23,12 @@
             v-model="form.email"
             id="email"
             name="email"
-            class="form-input rounded-md border-gray-300 w-full" />
+            class="form-input rounded-md border-gray-300 w-full" 
+            @input="validateEmail()" />
         <span class="text-red-600" v-if="form.errors.email">
             {{ form.errors.email }}
         </span>
     </div>
-
     <div class="mb-4 mt-10">
         <button-component
             @click="$emit('submitted', form)"
@@ -43,10 +42,28 @@
     import ButtonComponent from "@/Pages/ButtonComponent.vue";
 
     export default {
-        components: { ButtonComponent },
+        components: {
+            ButtonComponent
+        },
 
-        props: [ "form" ],
+        props: [
+            "form"
+        ],
 
-        emits: ['submitted'],
+        emits: [
+            'submitted'
+        ],
+
+        methods:{
+            validateEmail() {
+                axios.get(route("validateEmail", { email: this.form.email }))
+                    .then((response) => {
+                        if (Boolean(response.data)) this.form.errors.email = response.data.message;
+
+                        else this.form.errors.email = "";
+                    }
+                );
+            },
+        }
     }
 </script>
