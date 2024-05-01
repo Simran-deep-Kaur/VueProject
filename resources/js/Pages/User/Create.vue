@@ -1,9 +1,9 @@
 <template>
-    <Head title="Create Employee" />
+    <Head title="Create User" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Employee
+                Create User
             </h2>
         </template>
 
@@ -20,7 +20,7 @@
 <script>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import SharedForm from '../Employee/SharedForm.vue';
+import SharedForm from './Form.vue';
 import { useForm } from "@inertiajs/vue3";
 
 export default {
@@ -34,16 +34,12 @@ export default {
             form: useForm({
                 name: "",
                 email: "",
-                gender: "",
-                age: "",
-                description: "",
-                profile_image: ""
             }),
         };
     },
     methods: {
         submit (form) {
-            form.post(route("employees.store"));
+            form.post(route("users.store"));
         },
     }
 };

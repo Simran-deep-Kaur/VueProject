@@ -4,9 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class EmployeeMiddleware
+class EmployeeAccessControl
 {
     /**
      * Handle an incoming request.
@@ -15,7 +14,7 @@ class EmployeeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->employee->user_id !== auth()->user()->id) {
+        if ($request->employee->user_id !== auth()->user()->id && !$request->user()->hasRole('super-admin')) {
             return abort( 403, 'You cannot access the employees of other user');
         }
 

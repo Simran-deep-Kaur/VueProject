@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, defineProps } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -7,6 +7,8 @@ import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
 
+const props = defineProps(['type']);
+console.log(props.type);
 const showingNavigationDropdown = ref(false);
 </script>
 
@@ -29,8 +31,11 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <NavLink :href="route('dashboard', { type: 'employees' })" :active="type === 'employees' || type === null"> 
+                                    Employees
+                                </NavLink>
+                                <NavLink :href="route('dashboard', { type: 'users' })" :active="type === 'users'">
+                                    Users
                                 </NavLink>
                             </div>
                         </div>

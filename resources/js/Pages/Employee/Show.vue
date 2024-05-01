@@ -1,9 +1,9 @@
 <template>
-    <Head title="View User" />
+    <Head title="View Employee" />
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                View User
+                View Employee
             </h2>
         </template>
 

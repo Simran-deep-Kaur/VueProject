@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeValidation;
 use App\Http\Resources\EmployeeResource;
+use App\Http\Resources\UserResource;
 use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,12 +14,23 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        $employees = Employee::filter($request->user()->employees(), $request->filter)
+        // dd($request->filter);
+        if ($request->user()->hasRole('super-admin')){
+            $query = Employee::query();
+        }
+        else{
+            $query = $request->user()->employees();
+         
+        }
+        $employees = Employee::filter($query, $request->filter)
                                 ->paginate(10);
 
         return Inertia::render('Dashboard', [
             'employees' => EmployeeResource::collection($employees)->resolve(),
-            'status' => 'Success'
+            'status' => 'Success',
+            'type' => $request->type,
+            'users' => UserResource::collection(User::whereNotIn('id',[auth()->id()])->get())->resolve(),
+            'role' => $request->user()->roles->pluck('name')->toArray(),
         ]);
     }
 

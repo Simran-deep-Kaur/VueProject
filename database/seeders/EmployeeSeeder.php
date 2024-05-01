@@ -21,7 +21,7 @@ class EmployeeSeeder extends Seeder
                 'email' =>$faker->unique('employees')->safeEmail(),
                 'gender' => $faker->randomElement(['male', 'female', 'other']),
                 'age' =>$faker->numberBetween(0,100),
-                'user_id' => 1,
+                'user_id' => 2,
                 'description' => $faker->sentence(4),
             ]);
         }

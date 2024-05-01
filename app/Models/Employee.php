@@ -21,9 +21,13 @@ class Employee extends Model
 
     public static function filter($employeesQuery,$filter)
     {
-        $employeesQuery
-            ->when($filter === 'below18', fn ($query) => $query->below18())
-            ->when($filter === 'above18', fn ($query) => $query->above18());
+        if ($filter === 'below18') {
+            return $employeesQuery->below18();
+        } elseif ($filter === 'above18') {
+            return $employeesQuery->above18();
+        } elseif ($filter !== null && $filter !== 'all') {
+            return $employeesQuery->where('user_id', $filter);
+        }
     
         return $employeesQuery;
     }
